@@ -9,5 +9,17 @@ class BaseModel(Model):
         database = db
 
 class Though(BaseModel):
-    content = CharField(unique=True)
+    content = CharField(null=False)
+    parsed = BooleanField(default=False)
     created_date = DateTimeField(default=datetime.datetime.now)
+
+class Word(BaseModel):
+    label = CharField(null=False)
+    content = CharField(null=False)
+
+class ThoughWord(BaseModel):
+    word = ForeignKeyField(Word)
+    though = ForeignKeyField(Though)
+
+
+db.create_tables([Though, Word, ThoughWord])
