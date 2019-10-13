@@ -11,9 +11,12 @@ class BaseModel(Model):
 class Though(BaseModel):
     content = CharField(null=False)
     parsed = BooleanField(default=False)
-    created_date = DateTimeField(default=datetime.datetime.now)
+    created_at = DateTimeField(default=datetime.datetime.now)
 
     def export(self):
+        return '%s - %s' % (self.created_at.strftime('%Y-%m-%d %H:%M'), self.sentence())
+
+    def sentence(self):
         word = self.thoughword.word
         return str(self.content).replace(word.content, word.symbol())
 
