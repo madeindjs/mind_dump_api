@@ -6,6 +6,9 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 
+import logging
+
+
 
 nltk.download('punkt')
 nlp = spacy.load('fr')
@@ -13,11 +16,8 @@ french_lemmatizer = LefffLemmatizer()
 nlp.add_pipe(french_lemmatizer, name='lefff', before='ner')
 
 
-def main():
-    sentence = sys.argv[1:]
-
-
-    assert sentence, 'You must provide something'
+def parse_sentence(sentence):
+    logger = logging.getLogger('parse_sentence')
 
     doc = nlp(u'%s' % sentence)
 
@@ -26,33 +26,17 @@ def main():
     locations = []
 
     for entity in doc.ents:
-        print('%s: %s' % (entity.label_, entity.text))
+        logger.debug('Found this entity: [%s] %s' % (entity.label_, entity.text))
         if entity.label_ == 'PER':
-            # Get only persons
             persons.append(entity.text)
         elif entity.label_ == 'LOC':
-            # Get only locations
             locations.append(entity.text)
         elif entity.label_ == 'ORG':
-            # Get only organisation
             organisations.append(entity.text)
 
-    print_header('organisations')
-    print(uniq(organisations))
-
-    print_header('locations')
-    print(uniq(locations))
-
-    print_header('persons')
-    print(uniq(persons))
-
-
-def sanitize_chapter(chapter):
-    """Remove some bad sring who don't want on """
-    # clean chapter
-    chapter = chapter.replace('\n', ' ')
-    chapter = chapter.replace('_', '')
-    return chapter
+    organisations = uniq(organisations)
+    locations = uniq(locations)
+    persons = uniq(persons)
 
 
 def uniq(array):
@@ -60,12 +44,8 @@ def uniq(array):
     return list(sorted(set(array)))
 
 
-def print_header(title):
-    """Print a beautifull header"""
-    print("")
-    print(title)
-    print('=' * 80)
-
-
 if __name__ == '__main__':
-    main()
+    sentence = sys.argv[1:]
+    assert sentence, 'You must provide something'
+
+    parse_sentence(sentence)
