@@ -1,6 +1,6 @@
 import sys
-from models import Though, Word, ThoughWord
-from parse import parse_sentence
+from mind_dump.models import Though, Word, ThoughWord
+from mind_dump.parse import parse_sentence
 
 
 if __name__ == '__main__':
