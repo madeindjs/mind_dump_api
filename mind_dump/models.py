@@ -13,9 +13,24 @@ class Though(BaseModel):
     parsed = BooleanField(default=False)
     created_date = DateTimeField(default=datetime.datetime.now)
 
+    def export(self):
+        word = self.thoughword.word
+        return str(self.content).replace(word.content, word.symbol())
+
+
 class Word(BaseModel):
     label = CharField(null=False)
     content = CharField(null=False)
+
+    def symbol(self):
+        labels = {
+            'PER': '+',
+            'LOC': '@',
+            'ORG': ':',
+            'MISC': '?'
+        }
+
+        return '%s[%s]' % (labels.get(self.label), self.content)
 
 class ThoughWord(BaseModel):
     word = ForeignKeyField(Word)
