@@ -4,13 +4,13 @@ Export all your thoughts and let Natural Language Processing [Spacy](https://spa
 
 ## Usage
 
+~~~bash
+$ python3 mind_dump.py "Bonjour Lorène, je pense que je vais passer te voir cette après midi à Croix Rousse"
+~~~
 
-
-Parse a TXT book from <http://www.gutenberg.org>
-
-## Instalation
+## Installation
 
 ~~~bash
-$ pip3 install -r REQUIRMENTS.txt
+$ pip3 install -r REQUIREMENTS.txt
 $ python3 -m spacy download fr # and other lang if needed
 ~~~

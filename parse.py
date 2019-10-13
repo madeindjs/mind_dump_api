@@ -1,4 +1,3 @@
-import sys
 from spacy_lefff import LefffLemmatizer, POSTagger
 import spacy
 import pprint
@@ -44,8 +43,4 @@ def uniq(array):
     return list(sorted(set(array)))
 
 
-if __name__ == '__main__':
-    sentence = sys.argv[1:]
-    assert sentence, 'You must provide something'
 
-    parse_sentence(sentence)
