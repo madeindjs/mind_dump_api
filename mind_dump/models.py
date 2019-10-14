@@ -40,6 +40,13 @@ class Though(BaseModel):
 
         return sentence
 
+    def to_object(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'tags': [{'label': word.label, 'content': word.content} for word in self.words]
+        }
+
 
 ThoughWord = Though.words.get_through_model()
 

@@ -1,6 +1,7 @@
 import sys
 from mind_dump.models import Though, Word, ThoughWord
 from mind_dump.parse import parse_sentence
+
 from sqlite3 import IntegrityError
 
 def import_sentence(sentence):
@@ -22,6 +23,8 @@ def import_sentence(sentence):
 
     though.parsed = True
     though.save()
+
+    return though
 
 
 if __name__ == '__main__':
