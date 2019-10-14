@@ -4,12 +4,12 @@ Export all your thoughts and let Natural Language Processing [Spacy](https://spa
 
 ## Usage
 
-### Parse thoughts
+### Import
 
 ~~~bash
-$ python3 mind_dump.py "Bonjour Lorène, je pense que je vais passer te voir cette après midi à Croix Rousse"
+$ python3 add.py "Bonjour Lorène, je pense que je vais passer te voir cette après midi à Croix Rousse"
 $ # OR
-$ echo "Bonjour Lorène, je pense que je vais passer te voir cette après midi à Croix Rousse" | python3 mind_dump.py
+$ echo "Bonjour Lorène, je pense que je vais passer te voir cette après midi à Croix Rousse" | python3 add.py
 ~~~
 
 ### Export
@@ -26,6 +26,12 @@ Exemple:
 ~~~bash
 $ python3 export.py
 2019-10-14 13:26 - Bonjour +[Lorène], je pense que je vais passer te voir cette après midi à @[Croix Rousse]
+~~~
+
+### Server
+
+~~~bash
+$ env FLASK_APP=server.py flask run
 ~~~
 
 ## Installation
