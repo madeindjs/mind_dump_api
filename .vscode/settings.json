@@ -3,6 +3,7 @@
         "ents",
         "nltk",
         "punkt",
-        "spacy"
+        "spacy",
+        "sqlite"
     ]
 }
