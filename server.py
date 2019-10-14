@@ -1,6 +1,6 @@
 from flask import Flask, escape, request, jsonify
 from add import import_sentence
-from mind_dump.models import Though
+from mind_dump.models import Though, ThoughWord, Word
 import mistune
 
 
@@ -17,7 +17,11 @@ def home():
 @app.route('/thoughts/')
 def index():
     thoughts_export = []
-    thoughts = (Though.select())
+    thoughts = (
+        Though.select(Though, Word)
+              .join(ThoughWord)
+              .join_from(ThoughWord, Word)
+    )
 
     for though in thoughts:
         thoughts_export.append(though.to_object())
