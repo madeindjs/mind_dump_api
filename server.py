@@ -2,6 +2,7 @@ from flask import Flask, escape, request, jsonify
 from flask_cors import CORS
 from add import import_sentence
 from mind_dump.models import Though, ThoughWord, Word
+from peewee import JOIN
 import mistune
 
 
@@ -21,8 +22,8 @@ def index():
     thoughts_export = []
     thoughts = (
         Though.select(Though, Word)
-              .join(ThoughWord)
-              .join_from(ThoughWord, Word)
+              .join(ThoughWord, JOIN.LEFT_OUTER)
+              .join_from(ThoughWord, Word, JOIN.LEFT_OUTER)
               .order_by(Though.created_at.desc())
     )
 
