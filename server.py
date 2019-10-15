@@ -23,6 +23,7 @@ def index():
         Though.select(Though, Word)
               .join(ThoughWord)
               .join_from(ThoughWord, Word)
+              .order_by(Though.created_at.desc())
     )
 
     for though in thoughts:
