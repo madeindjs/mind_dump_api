@@ -2,4 +2,5 @@ nltk
 spacy-lefff
 peewee
 flask
+flask_cors
 mistune

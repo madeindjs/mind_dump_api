@@ -1,10 +1,12 @@
 from flask import Flask, escape, request, jsonify
+from flask_cors import CORS
 from add import import_sentence
 from mind_dump.models import Though, ThoughWord, Word
 import mistune
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():
